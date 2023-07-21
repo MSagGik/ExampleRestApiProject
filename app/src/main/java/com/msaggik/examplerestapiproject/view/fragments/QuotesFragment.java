@@ -1,4 +1,4 @@
-package com.msaggik.examplerestapiproject.ui.quotes;
+package com.msaggik.examplerestapiproject.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.msaggik.examplerestapiproject.databinding.FragmentQuotesBinding;
+import com.msaggik.examplerestapiproject.viewmodel.fragments.QuotesViewModel;
 
 public class QuotesFragment extends Fragment {
 

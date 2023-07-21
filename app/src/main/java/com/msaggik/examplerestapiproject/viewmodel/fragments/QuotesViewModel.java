@@ -1,4 +1,4 @@
-package com.msaggik.examplerestapiproject.ui.quotes;
+package com.msaggik.examplerestapiproject.viewmodel.fragments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

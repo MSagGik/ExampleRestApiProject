@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_quotes"
-        android:name="com.msaggik.examplerestapiproject.ui.quotes.QuotesFragment"
+        android:name="com.msaggik.examplerestapiproject.view.fragments.QuotesFragment"
         android:label="@string/menu_quotes"
         tools:layout="@layout/fragment_quotes" />
 
     <fragment
         android:id="@+id/nav_products"
-        android:name="com.msaggik.examplerestapiproject.ui.products.ProductsFragment"
+        android:name="com.msaggik.examplerestapiproject.view.fragments.ProductsFragment"
         android:label="@string/menu_products"
         tools:layout="@layout/fragment_products" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.msaggik.examplerestapiproject.ui.settings.SettingsFragment"
+        android:name="com.msaggik.examplerestapiproject.view.fragments.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

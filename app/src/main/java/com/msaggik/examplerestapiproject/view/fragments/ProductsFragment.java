@@ -1,4 +1,4 @@
-package com.msaggik.examplerestapiproject.ui.products;
+package com.msaggik.examplerestapiproject.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.msaggik.examplerestapiproject.databinding.FragmentProductsBinding;
+import com.msaggik.examplerestapiproject.viewmodel.fragments.ProductsViewModel;
 
 public class ProductsFragment extends Fragment {
 

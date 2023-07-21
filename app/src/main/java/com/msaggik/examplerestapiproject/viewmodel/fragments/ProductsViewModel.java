@@ -1,16 +1,16 @@
-package com.msaggik.examplerestapiproject.ui.settings;
+package com.msaggik.examplerestapiproject.viewmodel.fragments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SettingsViewModel extends ViewModel {
+public class ProductsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public SettingsViewModel() {
+    public ProductsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Настройки");
+        mText.setValue("Продукты");
     }
 
     public LiveData<String> getText() {
