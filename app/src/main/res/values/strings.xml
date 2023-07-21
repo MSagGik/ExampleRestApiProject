@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ExampleRestApiProject</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Иван Петров</string>
+    <string name="nav_header_subtitle">\@petrow</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_quotes">Цитаты</string>
+    <string name="menu_products">Продукты</string>
+    <string name="menu_settings">Настройки</string>
+</resources>
