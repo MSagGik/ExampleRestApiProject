@@ -32,7 +32,6 @@ public class ProductsFragment extends Fragment implements Runnable{
         handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
         new Thread(this).start();
 
-
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         recyclerView = view.findViewById(R.id.recyclerview_products);
         adapterProducts = new AdapterProducts(this, productsData);
@@ -43,7 +42,7 @@ public class ProductsFragment extends Fragment implements Runnable{
 
     @Override
     public void run() {
-        productsData = new HttpsHelper().serverDataProduct();
+        productsData = new HttpsHelper().serverDataProduct(getActivity());
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -51,7 +50,6 @@ public class ProductsFragment extends Fragment implements Runnable{
                 adapterProducts = new AdapterProducts(ProductsFragment.this, productsData);
                 recyclerView.setAdapter(adapterProducts);
             }
-        },1400);
-
+        },0);
     }
 }

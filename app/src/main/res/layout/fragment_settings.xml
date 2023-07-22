@@ -7,16 +7,114 @@
     tools:context=".view.fragments.SettingsFragment">
 
     <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
+        android:id="@+id/urlServerHeader"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/url_server_header"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/urlServerSetting"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:paddingStart="17sp"
+        android:ems="10"
+        android:hint="@string/url_server_setting"
+        android:textSize="17sp"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:textStyle="italic"
+        android:background="@drawable/shape_quotes"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlServerHeader"
+        tools:ignore="RtlSymmetry" />
+
+    <Button
+        android:id="@+id/buttonSetting"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#C68E51"
+        android:text="@string/button_update_setting"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlServerSetting" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSetting">
+
+        <TextView
+            android:id="@+id/urlConnectionCheckHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/url_connection_header"
+            android:textColor="#FF107B9C"
+            android:textColorHint="#6896A5"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="30dp"/>
+
+        <Button
+            android:id="@+id/buttonCheck"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:text="@string/check_button" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resultConnectionCheck"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="@string/result_connection_check"
+        android:gravity="center_vertical"
+        android:paddingStart="17sp"
+        android:textStyle="italic"
+        android:textSize="17sp"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:background="@drawable/shape_setting"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSetting"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/infoSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/https_codes"
+        android:textStyle="normal"
+        android:textSize="17sp"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultConnectionCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

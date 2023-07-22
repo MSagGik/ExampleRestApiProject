@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -43,15 +44,14 @@ public class QuotesFragment extends Fragment implements Runnable{
 
     @Override
     public void run() {
-        quotesData = new HttpsHelper().serverDataQuote();
-
+        quotesData = new HttpsHelper().serverDataQuote(getActivity());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 adapterQuotes = new AdapterQuotes(QuotesFragment.this, quotesData);
                 recyclerView.setAdapter(adapterQuotes);
             }
-        },1400);
+        },0);
 
     }
 }
