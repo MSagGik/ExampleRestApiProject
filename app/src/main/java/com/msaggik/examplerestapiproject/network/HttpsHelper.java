@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -39,7 +40,8 @@ public class HttpsHelper {
             for(int i = 0; i < jsonArray.length(); i++) {
                 productList.add(new Product(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("title"),
                         jsonArray.getJSONObject(i).getDouble("price"), jsonArray.getJSONObject(i).getString("description"),
-                       jsonArray.getJSONObject(i).getString("thumbnail")));
+                       jsonArray.getJSONObject(i).getString("thumbnail"), jsonArray.getJSONObject(i).getJSONArray("images")
+                        .getString(new Random().nextInt(jsonArray.getJSONObject(i).getJSONArray("images").length()))));
             }
         } catch (JSONException e) {
             throw new RuntimeException(e);

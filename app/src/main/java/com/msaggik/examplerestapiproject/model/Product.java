@@ -2,7 +2,9 @@ package com.msaggik.examplerestapiproject.model;
 
 import android.net.Uri;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int id;
     private String title;
     private double price;
@@ -10,12 +12,13 @@ public class Product {
     private String thumbnail;
     private String images;
 
-    public Product(int id, String title, double price, String description, String thumbnail) {
+    public Product(int id, String title, double price, String description, String thumbnail, String images) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.description = description;
         this.thumbnail = thumbnail;
+        this.images = images;
     }
 
     public int getId() {

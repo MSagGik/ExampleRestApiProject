@@ -1,6 +1,7 @@
 package com.msaggik.examplerestapiproject.viewmodel.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.msaggik.examplerestapiproject.R;
 import com.msaggik.examplerestapiproject.model.Product;
+import com.msaggik.examplerestapiproject.view.activities.ProductActivity;
 import com.msaggik.examplerestapiproject.view.fragments.ProductsFragment;
 import com.squareup.picasso.Picasso;
-import com.stelladk.arclib.ArcShape;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHolder> {
 
@@ -46,6 +49,12 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         holder.titleProduct.setText(product.getTitle());
         holder.priceProduct.setText(product.getPrice() + " coin");
         holder.descriptionProduct.setText(product.getDescription());
+        // слушатель нажатия на карточку
+        holder.cardViewProduct.setOnClickListener(view -> {
+            Intent intent = new Intent(productsFragment.getActivity(), ProductActivity.class);
+            intent.putExtra(Product.class.getSimpleName(), product);
+            Objects.requireNonNull(productsFragment.getActivity()).startActivity(intent);
+        });
     }
 
     // метод getItemCount() возвращает количество объектов в списке
@@ -57,12 +66,14 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
     // созданный статический класс ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // неизменяемые поля представления
+        final CardView cardViewProduct;
         final ImageView thumbnailProduct;
         final TextView titleProduct, priceProduct, descriptionProduct;
 
         // конструктор класса ViewHolder с помощью которого мы связываем поля и представление item_products.xml
         ViewHolder(View view) {
             super(view);
+            cardViewProduct = view.findViewById(R.id.cardViewProduct);
             thumbnailProduct = view.findViewById(R.id.thumbnailProduct);
             titleProduct = view.findViewById(R.id.titleProduct);
             priceProduct = view.findViewById(R.id.priceProduct);

@@ -54,6 +54,4 @@ dependencies {
     }
     // загрузка изображений
     implementation 'com.squareup.picasso:picasso:2.71828'
-    // скругление углов изображений
-    implementation 'com.github.stelladk:ArcLibrary:0.1.0'
 }

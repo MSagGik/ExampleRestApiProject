@@ -28,7 +28,7 @@ public class ProductsFragment extends Fragment implements Runnable{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        productsData.add(new Product(1, "...", 0.0f, "... загрузка с сервера", null));
+        productsData.add(new Product(1, "...", 0.0f, "... загрузка с сервера", null, null));
         handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
         new Thread(this).start();
 
