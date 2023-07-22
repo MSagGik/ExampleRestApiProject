@@ -1,38 +1,57 @@
 package com.msaggik.examplerestapiproject.view.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.msaggik.examplerestapiproject.databinding.FragmentQuotesBinding;
-import com.msaggik.examplerestapiproject.viewmodel.fragments.QuotesViewModel;
+import com.msaggik.examplerestapiproject.R;
+import com.msaggik.examplerestapiproject.model.Quote;
+import com.msaggik.examplerestapiproject.network.HttpsHelper;
+import com.msaggik.examplerestapiproject.viewmodel.adapters.AdapterQuotes;
 
-public class QuotesFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private FragmentQuotesBinding binding;
+public class QuotesFragment extends Fragment implements Runnable{
+    private List<Quote> quotesData = new ArrayList<>();
+    private AdapterQuotes adapterQuotes;
+    private RecyclerView recyclerView;
+    private Handler handler;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        QuotesViewModel quotesViewModel =
-                new ViewModelProvider(this).get(QuotesViewModel.class);
+        quotesData.add(new Quote(1, "... загрузка с сервера", "..."));
+        handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
+        new Thread(this).start();
 
-        binding = FragmentQuotesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        quotesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        View view = inflater.inflate(R.layout.fragment_quotes, container, false);
+        recyclerView = view.findViewById(R.id.recyclerview_quotes);
+        adapterQuotes = new AdapterQuotes(this, quotesData);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(adapterQuotes);
+        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void run() {
+        quotesData = new HttpsHelper().serverDataQuote();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapterQuotes = new AdapterQuotes(QuotesFragment.this, quotesData);
+                recyclerView.setAdapter(adapterQuotes);
+            }
+        },1400);
+
     }
 }

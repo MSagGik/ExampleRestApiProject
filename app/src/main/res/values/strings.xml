@@ -10,4 +10,6 @@
     <string name="menu_quotes">Цитаты</string>
     <string name="menu_products">Продукты</string>
     <string name="menu_settings">Настройки</string>
+    <string name="author_hint">Автор</string>
+    <string name="text_quotes_hint">Цитата</string>
 </resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/shape_quotes">
+
+    <TextView
+        android:id="@+id/authorQuotes"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/author_hint"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textQuotes"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/text_quotes_hint"
+        android:textColor="#FF107B9C"
+        android:textColorHint="#6896A5"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorQuotes" />
+</androidx.constraintlayout.widget.ConstraintLayout>
