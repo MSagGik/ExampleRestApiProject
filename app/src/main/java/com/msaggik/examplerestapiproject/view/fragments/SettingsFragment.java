@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.msaggik.examplerestapiproject.R;
 import com.msaggik.examplerestapiproject.network.HttpsHelper;
+import com.msaggik.examplerestapiproject.viewmodel.adapters.AdapterQuotes;
 
 import java.util.Objects;
 
@@ -33,6 +36,7 @@ public class SettingsFragment extends Fragment implements Runnable{
     private TextView resultConnectionCheck, infoSetting;
     private Button buttonSetting, buttonCheck;
     private Thread thread;
+    private Handler handler;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class SettingsFragment extends Fragment implements Runnable{
         settings = Objects.requireNonNull(getActivity()).getSharedPreferences(NAME_SETTING, Context.MODE_PRIVATE);
         urlConnection = settings.getString(CONNECTION_SETTING, "NoUrl"); // получение настроек
 
+        handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
         thread = new Thread(this);
         thread.start();
 
@@ -88,11 +93,15 @@ public class SettingsFragment extends Fragment implements Runnable{
         }
     };
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void run() {
         request = new HttpsHelper().connectionCheck(getActivity());
-        resultConnectionCheck.setText("Ответ на GET запрос " + request);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                resultConnectionCheck.setText("Ответ на GET запрос " + request);
+            }
+        });
     }
 
     private void updateThread() {
