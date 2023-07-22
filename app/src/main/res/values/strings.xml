@@ -12,4 +12,7 @@
     <string name="menu_settings">Настройки</string>
     <string name="author_hint">Автор</string>
     <string name="text_quotes_hint">Цитата</string>
+    <string name="title_product_hint">Название</string>
+    <string name="price_product_hint">Цена</string>
+    <string name="description_product_hint">Описание</string>
 </resources>

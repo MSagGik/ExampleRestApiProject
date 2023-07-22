@@ -1,38 +1,57 @@
 package com.msaggik.examplerestapiproject.view.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.msaggik.examplerestapiproject.databinding.FragmentProductsBinding;
-import com.msaggik.examplerestapiproject.viewmodel.fragments.ProductsViewModel;
+import com.msaggik.examplerestapiproject.R;
+import com.msaggik.examplerestapiproject.model.Product;
+import com.msaggik.examplerestapiproject.network.HttpsHelper;
+import com.msaggik.examplerestapiproject.viewmodel.adapters.AdapterProducts;
 
-public class ProductsFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private FragmentProductsBinding binding;
+public class ProductsFragment extends Fragment implements Runnable{
+    private List<Product> productsData = new ArrayList<>();
+    private AdapterProducts adapterProducts;
+    private RecyclerView recyclerView;
+    private Handler handler;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProductsViewModel productsViewModel =
-                new ViewModelProvider(this).get(ProductsViewModel.class);
+        productsData.add(new Product(1, "...", 0.0f, "... загрузка с сервера", null));
+        handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
+        new Thread(this).start();
 
-        binding = FragmentProductsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        productsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        View view = inflater.inflate(R.layout.fragment_products, container, false);
+        recyclerView = view.findViewById(R.id.recyclerview_products);
+        adapterProducts = new AdapterProducts(this, productsData);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(adapterProducts);
+        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void run() {
+        productsData = new HttpsHelper().serverDataProduct();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapterProducts = new AdapterProducts(ProductsFragment.this, productsData);
+                recyclerView.setAdapter(adapterProducts);
+            }
+        },1400);
+
     }
 }

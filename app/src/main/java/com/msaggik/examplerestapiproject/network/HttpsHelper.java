@@ -1,7 +1,9 @@
 package com.msaggik.examplerestapiproject.network;
 
+import android.net.Uri;
 import android.os.Handler;
 
+import com.msaggik.examplerestapiproject.model.Product;
 import com.msaggik.examplerestapiproject.model.Quote;
 
 import org.json.JSONArray;
@@ -23,7 +25,27 @@ public class HttpsHelper {
 
     private final String URL_SERVER = "https://dummyjson.com/";
     private final String ADD_QUOTES = "quotes?skip=0&limit=100";
+    private final String ADD_PRODUCTS = "products?skip=0&limit=100";
     private String request; // url для запросов на сервер
+
+    // метод формирования списка сущностей продуктов
+    public List<Product> serverDataProduct() {
+        request = URL_SERVER + ADD_PRODUCTS;
+        JSONObject jsonObject = serverRequest(request);
+        List<Product> productList = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("products");
+            for(int i = 0; i < jsonArray.length(); i++) {
+                productList.add(new Product(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("title"),
+                        jsonArray.getJSONObject(i).getDouble("price"), jsonArray.getJSONObject(i).getString("description"),
+                       jsonArray.getJSONObject(i).getString("thumbnail")));
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return productList;
+    }
 
     // метод формирования списка сущностей цитат
     public List<Quote> serverDataQuote() {
