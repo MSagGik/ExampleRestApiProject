@@ -1,7 +1,5 @@
 package com.msaggik.examplerestapiproject.model;
 
-import android.net.Uri;
-
 import java.io.Serializable;
 
 public class Product implements Serializable {

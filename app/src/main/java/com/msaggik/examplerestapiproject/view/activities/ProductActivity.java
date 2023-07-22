@@ -5,20 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Resources;
+
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.msaggik.examplerestapiproject.R;
-import com.msaggik.examplerestapiproject.databinding.FragmentProductsBinding;
 import com.msaggik.examplerestapiproject.model.Product;
-import com.msaggik.examplerestapiproject.view.fragments.ProductsFragment;
 import com.squareup.picasso.Picasso;
 
 public class ProductActivity extends AppCompatActivity {

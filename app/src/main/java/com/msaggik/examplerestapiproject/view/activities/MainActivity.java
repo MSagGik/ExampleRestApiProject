@@ -3,11 +3,9 @@ package com.msaggik.examplerestapiproject.view.activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -22,8 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.msaggik.examplerestapiproject.R;
 import com.msaggik.examplerestapiproject.databinding.ActivityMainBinding;
 import com.msaggik.examplerestapiproject.network.HttpsHelper;
-import com.msaggik.examplerestapiproject.view.fragments.ProductsFragment;
-import com.msaggik.examplerestapiproject.viewmodel.adapters.AdapterProducts;
 
 public class MainActivity extends AppCompatActivity implements Runnable{
 

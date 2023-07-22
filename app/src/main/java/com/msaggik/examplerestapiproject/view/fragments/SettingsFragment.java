@@ -4,8 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavGraph;
-import androidx.navigation.NavInflater;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.msaggik.examplerestapiproject.R;
 import com.msaggik.examplerestapiproject.network.HttpsHelper;
-import com.msaggik.examplerestapiproject.view.activities.MainActivity;
-import com.msaggik.examplerestapiproject.viewmodel.adapters.AdapterProducts;
 
 import java.util.Objects;
 
@@ -38,7 +32,7 @@ public class SettingsFragment extends Fragment implements Runnable{
     private EditText urlServerSetting;
     private TextView resultConnectionCheck, infoSetting;
     private Button buttonSetting, buttonCheck;
-    private Handler handler;
+    private Thread thread;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,8 +41,8 @@ public class SettingsFragment extends Fragment implements Runnable{
         settings = Objects.requireNonNull(getActivity()).getSharedPreferences(NAME_SETTING, Context.MODE_PRIVATE);
         urlConnection = settings.getString(CONNECTION_SETTING, "NoUrl"); // получение настроек
 
-        handler = new Handler(Looper.getMainLooper()); // создание объекта обработчика сообщений
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
@@ -62,25 +56,13 @@ public class SettingsFragment extends Fragment implements Runnable{
         infoSetting.append("\nАдрес сайта должен быть\nhttps://dummyjson.com/" +
                 "\n200 - соединение успешное\n3хх - перенаправление\n4хх - ошибка URL\n5xx - ошибка сервера");
 
+        buttonSetting.setOnClickListener(listener);
+        buttonCheck.setOnClickListener(listener);
         return view;
-
-    }
-
-    @Override
-    public void run() {
-        request = new HttpsHelper().connectionCheck(getActivity());
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                buttonSetting.setOnClickListener(listener);
-                buttonCheck.setOnClickListener(listener);
-            }
-        },0);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
-        @SuppressLint("SetTextI18n")
+        @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
         @Override
         public void onClick(View view) {
 
@@ -100,9 +82,26 @@ public class SettingsFragment extends Fragment implements Runnable{
                     }
                     break;
                 case R.id.buttonCheck:
-                    resultConnectionCheck.setText("Ответ на GET запрос " + request);
+                    updateThread();
                     break;
             }
         }
     };
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void run() {
+        request = new HttpsHelper().connectionCheck(getActivity());
+        resultConnectionCheck.setText("Ответ на GET запрос " + request);
+    }
+
+    private void updateThread() {
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        thread = new Thread(this);
+        thread.start();
+    }
 }
