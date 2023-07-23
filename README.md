@@ -11,4 +11,4 @@
 <p align="left">
 <img src="https://github.com/MSagGik/ExampleRestApiProject/assets/108148690/37b9ba7a-45b2-4c7b-8fa5-9a6345b946b5"/>
 </p>
-Показанные в проекте илюстрации подгружены с сервиса https://dummyjson.com/, а иконки используются по лицензии Apache-2.0
+Показанные в проекте иллюстрации подгружены с сервиса https://dummyjson.com/, а иконки используются по лицензии Apache-2.0
